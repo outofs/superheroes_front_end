@@ -1,0 +1,17 @@
+body {
+  /* solid background */
+  background: rgb(36, 53, 56);
+  
+  /* gradient background*/
+  background: linear-gradient(180deg, rgb(97, 128, 122) 0%, rgb(12, 17, 16) 100%);    
+  
+  /* photo background */
+  background-image: url(https://images.hdqwalls.com/wallpapers/marvel-vs-dc-4k-iu.jpg);
+  background-size: cover;
+  background-position: center;  
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;    
+  height: 100vh;  
+}
