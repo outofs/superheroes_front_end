@@ -1,4 +1,4 @@
-export interface Hero {
+export interface Superhero {
   _id: string;
   nickname: string;
   real_name: string;
@@ -6,10 +6,4 @@ export interface Hero {
   superpowers: string[];
   catch_phrase: string;
   images: string[];
-}
-
-export interface HeroCard {
-  _id: string;
-  nickname: string;
-  image: string;
 }

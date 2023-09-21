@@ -1,3 +1,13 @@
+iframe {
+  display: none;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   /* solid background */
   background: rgb(36, 53, 56);
@@ -7,11 +17,12 @@ body {
   
   /* photo background */
   background-image: url(https://images.hdqwalls.com/wallpapers/marvel-vs-dc-4k-iu.jpg);
-  background-size: cover;
-  background-position: center;  
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
   
   display: flex;
   align-items: center;
-  justify-content: center;    
-  height: 100vh;  
+  justify-content: center; 
+  min-height: 100vh;  
 }

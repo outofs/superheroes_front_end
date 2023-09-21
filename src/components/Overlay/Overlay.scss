@@ -1,20 +1,27 @@
-.Home {
-  display: flex;
-  flex-direction: column;
-  row-gap: 64px;
-}
-
-.create__hero {
-  display: flex;
+.overlay {
+  position: fixed;
   width: 100%;
-  justify-content: center;
-  align-items: center;
-  gap: 32px;
-
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  
   backdrop-filter: blur(24px) saturate(50%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
   background-color: rgba(56, 12, 18, 0.25);
+  // border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.125);
+  // padding: 32px;
   filter: drop-shadow(0 30px 10px rgba(0, 0, 0, 0.125));
   padding: 16px;
+  z-index: 2;
+
+  z-index: 99;
+
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
