@@ -1,0 +1,14 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+
+  background-color: rgba(56, 12, 18, 0.5);
+  padding: 32px;
+
+  &__field {
+    background-color: white;
+    padding: 8px 16px;
+    font-size: 16px;
+  }
+}

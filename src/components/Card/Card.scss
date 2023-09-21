@@ -7,11 +7,19 @@
   padding: 32px;
   filter: drop-shadow(0 30px 10px rgba(0, 0, 0, 0.125));
 
+  transform: scale(1);
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
+
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 
   &__wrapper {
     width: 100%;
@@ -19,10 +27,11 @@
   }
 
   &__banner-image {
-    background-image: url(https://cdn.theatlantic.com/thumbor/NcreaZYqZHtPdzS9xzzjcN6gyI4=/540x0:2340x1800/1080x1080/media/img/mt/2016/01/superman/original.jpg);
+    // background-image: url(https://cdn.theatlantic.com/thumbor/NcreaZYqZHtPdzS9xzzjcN6gyI4=/540x0:2340x1800/1080x1080/media/img/mt/2016/01/superman/original.jpg);
     background-position: center;
     background-size: cover;
     height: 300px;
+    // width: 200px;
     width: 100%;
     border-radius: 12px;
     border: 1px solid rgba(189, 121, 121, 0.255);

@@ -1,0 +1,26 @@
+.superhero {
+  @include pageGrid;
+  grid-column: 1 /-1;
+  width: 100%;
+  background-color: gray;
+  padding: 32px;
+
+  &__nickname {
+    text-align: center;
+    grid-column: 1 /-1;
+  }
+
+  &__img{
+    display: block;
+    // height: auto;
+    grid-column: 1/6;
+  }
+
+  &__info {
+    grid-column: 7/-1;
+  }
+
+  &__real-name{
+    
+  }
+}

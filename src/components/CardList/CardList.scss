@@ -1,4 +1,8 @@
 .card__list {
-  display: flex;
+  display: grid;
+  --columns: 5;
   gap: 16px;
+
+  grid-column: 1/-1;
+  grid-template-columns: repeat(var(--columns),1fr);
 }

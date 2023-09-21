@@ -8,6 +8,7 @@ import { Pagination } from '../../components/Pagination';
 import { Button } from '../../components/Button';
 import { Overlay } from '../../components/Overlay';
 import { Loader } from '../../components/Loader';
+import { Form } from '../../components/Form/Form';
 
 export const HomePage: React.FC = () => {
   const [superheroes, setSuperheroes] = useState<GetManyResult>({
@@ -16,6 +17,7 @@ export const HomePage: React.FC = () => {
   });
 
   const [isLoading, setIsLoading] = useState(false);
+  const [isCreating, setIsCreating] = useState(false);
 
   const [page, setPage] = useState(1);
 
@@ -40,19 +42,27 @@ export const HomePage: React.FC = () => {
     };
   };
 
+  const handleShowForm = () => setIsCreating(true);
+  const handleCloseForm = () => setIsCreating(false);
+
 
   return (
-    <div className='Home'>
-      { isLoading && <Overlay>
+    <div className='home'>
+      {isLoading && (<Overlay>
         <Loader />
-      </Overlay>}
+      </Overlay>)}
+
+      {isCreating && (<Overlay>
+        <Form closeForm={handleCloseForm} />
+      </Overlay>)}
+
       <div className='create__hero'>
         <Button
           btnStyle='fill'
-          handler={() => { }}
+          handler={handleShowForm}
           text='CREATE YOUR SUPERHERO'
         />
-        O</div>
+      </div>
       <CardList superheroes={superheroes.heroes} />
 
       {
