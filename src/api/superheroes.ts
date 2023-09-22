@@ -10,43 +10,14 @@ export const getHero = (heroId: string) => {
   return client.get<Superhero>(`/heroes/${heroId}`);
 };
 
-export const createHero = ({
-  nickname,
-  real_name,
-  origin_description,
-  superpowers,
-  catch_phrase,
-  images
-}: Omit<Superhero, '_id'>) => {
-  return client.post<Superhero>('/heroes', {
-    nickname,
-    real_name,
-    origin_description,
-    superpowers,
-    catch_phrase,
-    images
-  });
+export const createHero = (data: FormData) => {
+  return client.post<Superhero>('/heroes', data);
 };
 
-export const updateTodo = ({
-  _id,
-  nickname,
-  real_name,
-  origin_description,
-  superpowers,
-  catch_phrase,
-  images
-}: Superhero) => {
-  return client.patch<Superhero>(`/heroes/${_id}`, {
-    nickname,
-    real_name,
-    origin_description,
-    superpowers,
-    catch_phrase,
-    images
-  });
+export const updateHero = (id: string, data: FormData) => {
+  return client.patch<Superhero>(`/heroes/${id}`, data);
 };
 
-export const deleteTodo = (heroId: string) => {
+export const deleteHero = (heroId: string) => {
   return client.delete(`/heroes/${heroId}`);
 };

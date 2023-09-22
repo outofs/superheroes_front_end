@@ -1,0 +1,4 @@
+.not-found {
+  @include flex (column, center, center);
+  gap: 20px;
+}

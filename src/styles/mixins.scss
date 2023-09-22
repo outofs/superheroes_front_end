@@ -6,7 +6,7 @@
 }
 
 @mixin pageGrid {
-  --columns: 20;
+  --columns: 24;
   display: grid;
   column-gap: 10px;
   max-width: 1400px;

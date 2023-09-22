@@ -4,11 +4,28 @@
   row-gap: 16px;
 
   background-color: rgba(56, 12, 18, 0.5);
-  padding: 32px;
+  padding: 40px;
+
+  &__label {
+    width: 100%;
+    color: white;
+  }
 
   &__field {
     background-color: white;
     padding: 8px 16px;
-    font-size: 16px;
+    font-size: 20px;
+    border-radius: 10px;
+    border: 2px solid gray;
+
+    
+  }
+
+  .is-danger {
+    border-color: red;
+
+    &::placeholder {
+      color: red;
+    }
   }
 }
