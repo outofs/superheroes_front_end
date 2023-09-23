@@ -1,0 +1,10 @@
+.card__list {
+  @include flex (row, center, center);
+
+  flex-wrap: wrap;
+  gap: 16px;
+
+  margin-top: 80px;
+
+  grid-column: 1/-1;
+}

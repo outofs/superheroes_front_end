@@ -1,0 +1,20 @@
+.pagination{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  grid-column: 1/-1;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+
+  border: 1px solid rgba(255, 255, 255, 0.125);
+
+  @include bluredBg();
+  padding: 16px;
+
+  span {
+    color: $color-primary;
+  }
+}

@@ -1,0 +1,22 @@
+.home {
+  @include pageGrid;
+  grid-column: 1/-1;
+
+  row-gap: 40px;
+}
+
+.create__hero {
+  @include flex(row, center, center); 
+
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  gap: 32px;
+  grid-column: 1/-1;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  padding: 16px;
+
+  @include bluredBg();
+}

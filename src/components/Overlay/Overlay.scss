@@ -1,0 +1,21 @@
+.overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  backdrop-filter: blur(24px) saturate(50%);
+  @include bluredBg();
+
+  padding: 16px;
+  z-index: 2;
+
+  z-index: 99;
+
+  overflow: hidden;
+
+  @include flex(row, center, center);
+}

@@ -1,0 +1,155 @@
+.superhero {
+  @include flex(column, center, center);
+  gap: 40px;
+
+  box-sizing: border-box;
+
+  grid-column: 1 /-1;
+  width: 100%;
+  min-height: 90vh;
+
+  padding: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+
+  @include bluredBg();
+
+  &__nickname {
+    text-align: center;
+    grid-column: 1 /-1;
+    color: $color-primary;
+  }
+
+  &__section {
+    @include pageGrid;
+  }
+
+  &__imgs {
+    display: grid;
+
+    @include flex(column, center, flex-start);
+    gap: 16px;
+
+    grid-column: 1/3;
+
+    @include onTablet {
+      grid-column: 1/2;
+    }
+
+    @include onMobile {
+      margin-top: 16px;
+      grid-column: 1 / -1;
+      order: 2;
+      flex-direction: row;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    &-item {
+      box-sizing: border-box;
+      display: block;
+      width: 100%;
+      aspect-ratio: 1/1;
+
+      border-radius: 8px;
+      border: 1px solid #2e2e2e;
+
+      cursor: pointer;
+
+      max-width: 78px;
+      max-height: 78px;
+      @include flex(row, center, center);
+      overflow: hidden;
+
+      transition: border 0.3s ease;
+
+      &:hover {
+        border: 1px solid #666666;
+      }
+    }
+
+    &-img {
+      width: auto;
+      height: 95%;
+      display: block;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+  }
+
+  .img-active {
+    border: 1px solid $color-primary;
+  }
+
+  &__img-main {
+    grid-column: 3 / 13;
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    max-height: 422px;
+
+    @include onTablet {
+      grid-column: 2 / 8;
+    }
+
+    @include onMobile {
+      grid-column: 1 / -1;
+      order: 1;
+    }
+  }
+
+  &__info {
+    box-sizing: border-box;
+    background-color: $color-primary;
+    border-radius: 12px;
+    border: 1px solid $color-secondary;
+    grid-column: 14 / -1;
+    padding: 16px 8px;
+
+    @include onTablet {
+      grid-column: 8 / -1;
+    }
+
+    @include onMobile {
+      margin-top: 40px;
+      grid-column: 1 / -1;
+      order: 3;
+    }
+
+    &-block {
+      margin-top: 16px;
+    }
+
+    &-title {
+      color: $color-secondary;
+    }
+  }
+
+  &__real-name {
+    color: $color-secondary;
+    text-align: center;
+    margin-top: 16px;
+  }
+
+  &__desc {
+    color: $color-secondary;
+  }
+
+  &__superpowers {
+  }
+
+  &__superpower {
+  }
+
+  &__btns {
+    @include flex(row, center, center);
+    gap: 32px;
+
+    width: 100%;
+
+    @include bluredBg();
+
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    padding: 16px;
+  }
+}

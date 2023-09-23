@@ -1,0 +1,42 @@
+@mixin flex($direction: row, $align: initial, $justify: initial) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justify;
+}
+
+@mixin pageGrid {
+  --columns: 24;
+  display: grid;
+  column-gap: 10px;
+  max-width: 1400px;
+
+  grid-template-columns: repeat(var(--columns), 1fr);
+
+  @include onTablet {
+    --columns: 12;
+  }
+
+  @include onMobile {
+    --columns: 4;
+  }
+}
+
+@mixin onTablet {
+  @media (max-width: $tablet-max-width) {
+    @content;
+  }
+}
+
+@mixin onMobile {
+  @media (max-width: $mobile-max-width) {
+    @content;
+  }
+}
+
+@mixin bluredBg {
+  backdrop-filter: blur(24px) saturate(50%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(56, 12, 18, 0.25);
+  filter: drop-shadow(0 30px 10px rgba(0, 0, 0, 0.125));
+}

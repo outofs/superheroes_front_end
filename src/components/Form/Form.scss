@@ -1,0 +1,31 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+
+  background-color: rgba(56, 12, 18, 0.5);
+  padding: 40px;
+
+  &__label {
+    @include flex(column, center, center);
+    width: 100%;
+    color: $color-primary;
+  }
+
+  &__field {
+    width: 100%;
+    background-color: white;
+    padding: 8px 16px;
+    font-size: 20px;
+    border-radius: 10px;
+    border: 2px solid gray;   
+  }
+
+  .is-danger {
+    border-color: red;
+
+    &::placeholder {
+      color: red;
+    }
+  }
+}
