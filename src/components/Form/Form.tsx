@@ -26,13 +26,16 @@ export const Form: React.FC<Props> = ({ superhero, closeForm }) => {
   const { makeUpdate } = useContext(AppContext);
 
   const [formFields, setFormFields] = useState<Omit<Superhero, "_id">>({
-    nickname: superhero?.nickname || "",
+    nickname: superhero?.nickname || '',
     real_name: superhero?.real_name || "",
     origin_description: superhero?.origin_description || "",
     superpowers: superhero?.superpowers || [],
     catch_phrase: superhero?.catch_phrase || "",
     images: superhero?.images || [],
   });
+
+  // console.log(formFields);
+
 
   const [files, setFiles] = useState<FileList | null>(null);
 
@@ -174,6 +177,9 @@ export const Form: React.FC<Props> = ({ superhero, closeForm }) => {
         isImagesError: true,
       }));
     }
+
+    console.log(formErrors);
+    
 
     if (formErrors.isNicknameError
       || formErrors.isRealNameError
