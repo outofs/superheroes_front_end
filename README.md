@@ -6,9 +6,15 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
-```DATABASE = mongodb+srv://oleksandrhirych:<PASSWORD>@cluster0.2aa5huy.mongodb.net/?retryWrites=true&w=majority```
-```DATABASE_PASSWORD = your_password```
-```PORT = your_prefered_port```
+```
+DATABASE = mongodb+srv://oleksandrhirych:<PASSWORD>@cluster0.2aa5huy.mongodb.net/?retryWrites=true&w=majority
+```
+```
+DATABASE_PASSWORD = your_password
+```
+```
+PORT = your_prefered_port
+```
 
 ### `npm start`
 
