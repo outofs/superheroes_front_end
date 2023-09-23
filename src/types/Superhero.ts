@@ -6,4 +6,4 @@ export interface Superhero {
   superpowers: string[];
   catch_phrase: string;
   images: string[];
-}
+};

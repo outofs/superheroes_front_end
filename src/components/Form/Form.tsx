@@ -1,11 +1,12 @@
-import classNames from 'classnames';
+import classNames from "classnames";
 
-import { useState } from 'react';
-import { Superhero } from '../../types/Superhero'
-import { Button } from '../Button';
-import { Overlay } from '../Overlay';
-import { Loader } from '../Loader';
-import { createHero, updateHero } from '../../api/superheroes';
+import { useContext, useState } from "react";
+import { Superhero } from "../../types/Superhero"
+import { Button } from "../Button";
+import { Overlay } from "../Overlay";
+import { Loader } from "../Loader";
+import { createHero, updateHero } from "../../api/superheroes";
+import { AppContext } from "../AppContext/AppContext";
 
 type Props = {
   superhero?: Superhero;
@@ -22,16 +23,18 @@ interface FormErrors {
 }
 
 export const Form: React.FC<Props> = ({ superhero, closeForm }) => {
-  const [formFields, setFormFields] = useState<Omit<Superhero, '_id'>>({
-    nickname: superhero?.nickname || '',
-    real_name: superhero?.real_name || '',
-    origin_description: superhero?.origin_description || '',
+  const { makeUpdate } = useContext(AppContext);
+
+  const [formFields, setFormFields] = useState<Omit<Superhero, "_id">>({
+    nickname: superhero?.nickname || "",
+    real_name: superhero?.real_name || "",
+    origin_description: superhero?.origin_description || "",
     superpowers: superhero?.superpowers || [],
-    catch_phrase: superhero?.catch_phrase || '',
+    catch_phrase: superhero?.catch_phrase || "",
     images: superhero?.images || [],
   });
 
-  const [files, setFiles] = useState<FileList | null>(null)
+  const [files, setFiles] = useState<FileList | null>(null);
 
   const [formErrors, setFormErrors] = useState<FormErrors>({
     isNicknameError: false,
@@ -91,7 +94,7 @@ export const Form: React.FC<Props> = ({ superhero, closeForm }) => {
   ) => {
     setFormFields(currFields => ({
       ...currFields,
-      superpowers: event.target.value.split(', '),
+      superpowers: event.target.value.split(", "),
     }));
 
     setFormErrors(currErrors => ({
@@ -114,120 +117,100 @@ export const Form: React.FC<Props> = ({ superhero, closeForm }) => {
     }));
   };
 
-  // const changeImagesHandler = (
-  //   event: React.ChangeEvent<HTMLInputElement>,
-  // ) => {
-  //   setFormFields(currFields => ({
-  //     ...currFields,
-  //     images: event.target.value.split(', '),
-  //   }));
-
-
-  // };
-
   const changeImagesHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const fileList = e.currentTarget.files!;
+    const fileList = e.target.files;
 
     if (fileList && fileList.length) {
-      setFiles(fileList)
+      setFiles({ ...fileList });
     }
 
     setFormErrors(currErrors => ({
       ...currErrors,
       isImagesError: false,
     }));
-
-
-    // const data = new FormData();
-
-    // for (const file of fileList) {
-    //   data.append("file", file);
-    // }
-
-    // console.log(data);
-
-    // uploadImages(data);
   };
 
   const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const form = new FormData();
+    if (!formFields.nickname.trim()) {
+      setFormErrors(currErrors => ({
+        ...currErrors,
+        isNicknameError: true,
+      }));
+    }
 
-    form.append('nickname', formFields.nickname);
-    form.append('real_name', formFields.real_name);
-    form.append('origin_description', formFields.origin_description);
+    if (!formFields.real_name.trim()) {
+      setFormErrors(currErrors => ({
+        ...currErrors,
+        isRealNameError: true,
+      }));
+    }
 
-    formFields.superpowers.forEach(sp => {
-      form.append('superpowers', sp);
-    });
+    if (!formFields.origin_description.trim()) {
+      setFormErrors(currErrors => ({
+        ...currErrors,
+        isOriginDescriptionError: true,
+      }));
+    }
 
-    form.append('catch_phrase', formFields.catch_phrase);
+    if (!formFields.superpowers.length) {
+      setFormErrors(currErrors => ({
+        ...currErrors,
+        isSuperpowersError: true,
+      }));
+    }
 
-    if (files) {
-      for (const file of files) {
-        form.append("files", file);
-      }
-    };
+    if (!formFields.catch_phrase.trim()) {
+      setFormErrors(currErrors => ({
+        ...currErrors,
+        isCatchPhraseError: true,
+      }));
+    }
+
+    if (files && formFields.images.length) {
+      setFormErrors(currErrors => ({
+        ...currErrors,
+        isImagesError: true,
+      }));
+    }
+
+    if (formErrors.isNicknameError
+      || formErrors.isRealNameError
+      || formErrors.isOriginDescriptionError
+      || formErrors.isSuperpowersError
+      || formErrors.isCatchPhraseError
+      || formErrors.isImagesError
+    ) {
+      return;
+    }
 
     if (!superhero) {
-      if (!formFields.nickname.trim()) {
-        setFormErrors(currErrors => ({
-          ...currErrors,
-          isNicknameError: true,
-        }));
-      }
+      const formData = new FormData()
 
-      if (!formFields.real_name.trim()) {
-        setFormErrors(currErrors => ({
-          ...currErrors,
-          isRealNameError: true,
-        }));
-      }
+      formData.append("nickname", formFields.nickname);
+      formData.append("real_name", formFields.real_name);
+      formData.append("origin_description", formFields.origin_description);
 
-      if (!formFields.origin_description.trim()) {
-        setFormErrors(currErrors => ({
-          ...currErrors,
-          isOriginDescriptionError: true,
-        }));
-      }
+      formFields.superpowers.forEach(sp => {
+        formData.append("superpowers", sp);
+      });
 
-      if (!formFields.superpowers.length) {
-        setFormErrors(currErrors => ({
-          ...currErrors,
-          isSuperpowersError: true,
-        }));
-      }
+      formData.append("catch_phrase", formFields.catch_phrase);
 
-      if (!formFields.catch_phrase.trim()) {
-        setFormErrors(currErrors => ({
-          ...currErrors,
-          isCatchPhraseError: true,
-        }));
-      }
+      if (files) {
+        const filesArr = Object.values(files);
 
-      if (!files) {
-        setFormErrors(currErrors => ({
-          ...currErrors,
-          isImagesError: true,
-        }));
+        for (let i = 0; i < filesArr.length; i++) {
+          console.log(filesArr[i]);
+          formData.append("images", filesArr[i]);
+        }
       }
-
-      if (!formFields.nickname.trim()
-        || !formFields.real_name.trim()
-        || !formFields.origin_description.trim()
-        || !formFields.superpowers.length
-        || !formFields.catch_phrase.trim()
-        || !formFields.images
-      ) {
-        return;
-      }
-
-      console.log('Submit!');
 
       try {
         setIsLoading(true);
-        await createHero(form);
+        await createHero(formData);
+        makeUpdate();
       } finally {
         setIsLoading(false);
         closeForm();
@@ -236,9 +219,31 @@ export const Form: React.FC<Props> = ({ superhero, closeForm }) => {
       return;
     }
 
+    const formData = new FormData()
+
+    formData.append("nickname", formFields.nickname);
+    formData.append("real_name", formFields.real_name);
+    formData.append("origin_description", formFields.origin_description);
+
+    formFields.superpowers.forEach(sp => {
+      formData.append("superpowers", sp);
+    });
+
+    formData.append("catch_phrase", formFields.catch_phrase);
+
+    if (files) {
+      const filesArr = Object.values(files);
+
+      for (let i = 0; i < filesArr.length; i++) {
+        console.log(filesArr[i]);
+        formData.append("images", filesArr[i]);
+      }
+    }
+
     try {
       setIsLoading(true);
-      await updateHero(superhero._id, form);
+      await updateHero(superhero._id, formData);
+      makeUpdate();
     } finally {
       setIsLoading(false);
       closeForm();
@@ -250,98 +255,95 @@ export const Form: React.FC<Props> = ({ superhero, closeForm }) => {
       <Loader />
     </Overlay>
   ) : (
-    <form className='form' onSubmit={onSubmitHandler}>
-      <label className='form__label'>
+    <form className="form" onSubmit={onSubmitHandler}>
+      <label className="form__label">
         Nickname:
         <input
           type="text"
-          className={classNames('form__field', {
-            'is-danger': formErrors.isNicknameError,
+          className={classNames("form__field", {
+            "is-danger": formErrors.isNicknameError,
           })}
-          placeholder='Enter nickname'
+          placeholder="Enter nickname"
           value={formFields.nickname}
           onChange={changNicknameHandler}
         />
       </label>
 
-      <label className='form__label'>
+      <label className="form__label">
         Real name:
         <input
           type="text"
-          className={classNames('form__field', {
-            'is-danger': formErrors.isRealNameError,
+          className={classNames("form__field", {
+            "is-danger": formErrors.isRealNameError,
           })}
-          placeholder='Enter real name'
+          placeholder="Enter real name"
           value={formFields.real_name}
           onChange={changeRealNameHandler}
         />
       </label>
 
-      <label className='form__label'>
+      <label className="form__label">
         Description:
         <textarea
           rows={5}
-          className={classNames('form__field', {
-            'is-danger': formErrors.isOriginDescriptionError,
+          className={classNames("form__field", {
+            "is-danger": formErrors.isOriginDescriptionError,
           })}
-          placeholder='Provide description'
+          placeholder="Provide description"
           value={formFields.origin_description}
           onChange={changeOriginDescriptionHandler}
         />
       </label>
 
-      <label className='form__label'>
+      <label className="form__label">
         Superpowers:
         <textarea
-          className={classNames('form__field', {
-            'is-danger': formErrors.isSuperpowersError,
+          className={classNames("form__field", {
+            "is-danger": formErrors.isSuperpowersError,
           })}
-          placeholder='Superspeed, lazer vision...'
-          value={formFields.superpowers.join(', ')}
+          placeholder="Superspeed, lazer vision..."
+          value={formFields.superpowers.join(", ")}
           onChange={changeSuperpowersHandler}
         />
       </label>
 
-      <label className='form__label'>
+      <label className="form__label">
         Catch phrase:
         <textarea
-          className={classNames('form__field', {
-            'is-danger': formErrors.isCatchPhraseError,
+          className={classNames("form__field", {
+            "is-danger": formErrors.isCatchPhraseError,
           })}
-          placeholder='Enter catch phrase'
+          placeholder="Enter catch phrase"
           value={formFields.catch_phrase}
           onChange={changeCatchPhraseHandler}
         />
       </label>
 
-      <label className='form__label'>
+      <label className="form__label">
         Images:
         <input
           type="file"
           multiple
-          accept='image/*'
-          className={classNames('form__field', {
-            'is-danger': formErrors.isImagesError,
+          className={classNames("form__field", {
+            "is-danger": formErrors.isImagesError,
           })}
-          placeholder='Choose imgs'
-          value={formFields.images.join(', ')}
+          placeholder="Choose imgs"
           onChange={changeImagesHandler}
         />
       </label>
 
       <Button
-        text={!superhero ? 'CREATE' : 'UPDATE'}
-        btnStyle='fill'
-        btnType='submit'
+        text={!superhero ? "CREATE" : "UPDATE"}
+        btnStyle="fill"
+        btnType="submit"
         handler={() => { }}
       />
       <Button
-        text='CANCEL'
-        btnStyle='outline'
-        btnType='reset'
+        text="CANCEL"
+        btnStyle="outline"
+        btnType="reset"
         handler={closeForm}
       />
     </form>
   )
-
 }

@@ -1,6 +1,4 @@
 .card__list {
-  // display: grid;
-  // --columns: 5;
   @include flex (row, center, center);
 
   flex-wrap: wrap;
@@ -9,5 +7,4 @@
   margin-top: 80px;
 
   grid-column: 1/-1;
-  // grid-template-columns: repeat(var(--columns),1fr);
 }

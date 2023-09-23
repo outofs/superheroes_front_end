@@ -1,6 +1,6 @@
-import { GetManyResult } from '../types/GetManyResult';
-import { Superhero } from '../types/Superhero';
-import { client } from '../utils/fetchClient';
+import { GetManyResult } from "../types/GetManyResult";
+import { Superhero } from "../types/Superhero";
+import { client } from "../utils/fetchClient";
 
 export const getHeroes = (page:number = 1) => {
   return client.get<GetManyResult>(`/heroes?page=${page}`);
@@ -11,7 +11,7 @@ export const getHero = (heroId: string) => {
 };
 
 export const createHero = (data: FormData) => {
-  return client.post<Superhero>('/heroes', data);
+  return client.post<Superhero>("/heroes", data);
 };
 
 export const updateHero = (id: string, data: FormData) => {

@@ -1,5 +1,5 @@
-const BASE_URL = 'https://superheroes-tt-api.onrender.com';
-// const BASE_URL = 'http://127.0.0.1:3000';
+// const BASE_URL = 'https://superheroes-tt-api.onrender.com';
+const BASE_URL = 'http://127.0.0.1:3000';
 
 export function wait(delay: number) {
   return new Promise(resolve => {
@@ -17,10 +17,7 @@ function request<T>(
   const options: RequestInit = { method };
 
   if (data) {
-    options.body = JSON.stringify(data);
-    options.headers = {
-      'Content-Type': 'application/json; charset=UTF-8',
-    };
+    options.body = data;
   }
 
   return wait(300)
@@ -35,7 +32,7 @@ function request<T>(
 }
 
 export const client = {
-  getImgUrl: (img:string)=>`${BASE_URL}/img/heroes/${img}`,
+  getImgUrl: (img: string) => `${BASE_URL}/img/heroes/${img}`,
   get: <T>(url: string) => request<T>(url),
   post: <T>(url: string, data: any) => request<T>(url, 'POST', data),
   patch: <T>(url: string, data: any) => request<T>(url, 'PATCH', data),
