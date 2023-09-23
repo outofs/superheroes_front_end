@@ -1,10 +1,14 @@
-# Getting Started with Create React App
+# Front-end part Superheroes Test Task
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
 In the project directory, you can run:
+
+```DATABASE = mongodb+srv://oleksandrhirych:<PASSWORD>@cluster0.2aa5huy.mongodb.net/?retryWrites=true&w=majority```
+```DATABASE_PASSWORD = your_password```
+```PORT = your_prefered_port```
 
 ### `npm start`
 
