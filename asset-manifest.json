@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/superheroes_front_end/static/css/main.e2a3ada4.css",
+    "main.js": "/superheroes_front_end/static/js/main.fae32bed.js",
+    "index.html": "/superheroes_front_end/index.html",
+    "main.e2a3ada4.css.map": "/superheroes_front_end/static/css/main.e2a3ada4.css.map",
+    "main.fae32bed.js.map": "/superheroes_front_end/static/js/main.fae32bed.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e2a3ada4.css",
+    "static/js/main.fae32bed.js"
+  ]
+}
