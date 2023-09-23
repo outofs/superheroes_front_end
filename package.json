@@ -1,6 +1,6 @@
 {
   "name": "superheroes_front_end",
-  "homepage": "https://outofs.github.io/superheroes_front_end",
+  "homepage": ".",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
