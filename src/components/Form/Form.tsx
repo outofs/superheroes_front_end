@@ -171,7 +171,7 @@ export const Form: React.FC<Props> = ({ superhero, closeForm }) => {
       }));
     }
 
-    if (files && formFields.images.length) {
+    if !(files || formFields.images.length) {
       setFormErrors(currErrors => ({
         ...currErrors,
         isImagesError: true,
@@ -181,12 +181,12 @@ export const Form: React.FC<Props> = ({ superhero, closeForm }) => {
     console.log(formErrors);
     
 
-    if (formErrors.isNicknameError
-      || formErrors.isRealNameError
-      || formErrors.isOriginDescriptionError
-      || formErrors.isSuperpowersError
-      || formErrors.isCatchPhraseError
-      || formErrors.isImagesError
+    if (!formFields.nickname.trim()
+      || !formFields.real_name.trim()
+      || !formFields.origin_description.trim()
+      || !formFields.superpowers.length
+      || !formFields.catch_phrase.trim()
+      || !(files || formFields.images.length)
     ) {
       return;
     }
