@@ -164,29 +164,20 @@ export const Form: React.FC<Props> = ({ superhero, closeForm }) => {
       }));
     }
 
-    if (!formFields.catch_phrase.trim()) {
-      setFormErrors(currErrors => ({
-        ...currErrors,
-        isCatchPhraseError: true,
-      }));
-    }
-
-    if (files && formFields.images.length) {
+    if (!(files || formFields.images.length)) {
       setFormErrors(currErrors => ({
         ...currErrors,
         isImagesError: true,
       }));
     }
 
-    console.log(formErrors);
-    
 
-    if (formErrors.isNicknameError
-      || formErrors.isRealNameError
-      || formErrors.isOriginDescriptionError
-      || formErrors.isSuperpowersError
-      || formErrors.isCatchPhraseError
-      || formErrors.isImagesError
+    if (!formFields.nickname.trim()
+      || !formFields.real_name.trim()
+      || !formFields.origin_description.trim()
+      || !formFields.superpowers.length
+      || !formFields.catch_phrase.trim()
+      || !(files || formFields.images.length)
     ) {
       return;
     }
