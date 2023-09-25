@@ -171,7 +171,7 @@ export const Form: React.FC<Props> = ({ superhero, closeForm }) => {
       }));
     }
 
-    if !(files || formFields.images.length) {
+    if (!(files || formFields.images.length)) {
       setFormErrors(currErrors => ({
         ...currErrors,
         isImagesError: true,
