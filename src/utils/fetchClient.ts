@@ -1,5 +1,5 @@
-const BASE_URL = 'https://superheroes-tt-api.onrender.com';
-// const BASE_URL = 'http://127.0.0.1:3000';
+// const BASE_URL = "https://superheroes-tt-api.onrender.com";
+const BASE_URL = "http://127.0.0.1:3000";
 
 export function wait(delay: number) {
   return new Promise(resolve => {
@@ -7,11 +7,11 @@ export function wait(delay: number) {
   });
 }
 
-type RequestMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
+type RequestMethod = "GET" | "POST" | "PATCH" | "DELETE";
 
 function request<T>(
   url: string,
-  method: RequestMethod = 'GET',
+  method: RequestMethod = "GET",
   data: any = null,
 ): Promise<T> {
   const options: RequestInit = { method };
@@ -34,7 +34,7 @@ function request<T>(
 export const client = {
   getImgUrl: (img: string) => `${BASE_URL}/img/heroes/${img}`,
   get: <T>(url: string) => request<T>(url),
-  post: <T>(url: string, data: any) => request<T>(url, 'POST', data),
-  patch: <T>(url: string, data: any) => request<T>(url, 'PATCH', data),
-  delete: (url: string) => request(url, 'DELETE'),
+  post: <T>(url: string, data: any) => request<T>(url, "POST", data),
+  patch: <T>(url: string, data: any) => request<T>(url, "PATCH", data),
+  delete: (url: string) => request(url, "DELETE"),
 };

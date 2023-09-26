@@ -164,6 +164,13 @@ export const Form: React.FC<Props> = ({ superhero, closeForm }) => {
       }));
     }
 
+    if (!formFields.catch_phrase.trim()) {
+      setFormErrors(currErrors => ({
+        ...currErrors,
+        isCatchPhraseError: true,
+      }));
+    }
+
     if (!(files || formFields.images.length)) {
       setFormErrors(currErrors => ({
         ...currErrors,
