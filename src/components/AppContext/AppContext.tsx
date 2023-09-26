@@ -35,7 +35,9 @@ export const AppProvider: React.FC<Props> = ({ children }) => {
     setIsLoading(true);
     getHeroes(page)
       .then(setSuperheroes)
-      .finally(() => setIsLoading(false));
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, [page, update]);
 
   const prevPage = () => {

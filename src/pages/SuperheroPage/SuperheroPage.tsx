@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useContext } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import { Link, useParams } from "react-router-dom"
 import { Superhero } from "../../types/Superhero";
 import { Overlay } from "../../components/Overlay";
@@ -7,7 +7,6 @@ import { getHero } from "../../api/superheroes";
 import classNames from "classnames";
 import { Button } from "../../components/Button";
 import { Form } from "../../components/Form/Form";
-import { client } from "../../utils/fetchClient";
 import { AppContext } from '../../components/AppContext/AppContext';
 
 export const SuperheroPage: React.FC = () => {
@@ -17,11 +16,7 @@ export const SuperheroPage: React.FC = () => {
   const [superhero, setSuperhero] = useState<Superhero | null>(null);
   const [isEditing, setIsEditing] = useState<boolean>(false);
 
-  const imgs = useMemo(
-    () => superhero?.images.map(client.getImgUrl) || [], [superhero?.images],
-  );
-
-  const [mainImg, setMainImg] = useState(imgs[0]);
+  const [mainImg, setMainImg] = useState(superhero?.images[0]);
 
   useEffect(() => {
     if (id) {
@@ -30,8 +25,8 @@ export const SuperheroPage: React.FC = () => {
   }, [id, update])
 
   useEffect(() => {
-    setMainImg(imgs[0]);
-  }, [superhero, imgs]);
+    setMainImg(superhero?.images[0]);
+  }, [superhero]);
 
   const changeMainImgHandler = (img: string) => {
     if (img !== mainImg) {
@@ -56,7 +51,7 @@ export const SuperheroPage: React.FC = () => {
 
         <section className="superhero__section">
           <div className="superhero__imgs">
-            {imgs.map((img) => (
+            {superhero?.images.map((img) => (
               <button
                 key={img}
                 type="button"

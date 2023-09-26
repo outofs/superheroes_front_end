@@ -178,8 +178,6 @@ export const Form: React.FC<Props> = ({ superhero, closeForm }) => {
       }));
     }
 
-    console.log(formErrors);
-    
 
     if (!formFields.nickname.trim()
       || !formFields.real_name.trim()

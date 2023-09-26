@@ -2,7 +2,6 @@ import { useContext } from "react";
 
 import { Link } from "react-router-dom";
 import { Superhero } from "../../types/Superhero"
-import { client } from "../../utils/fetchClient";
 import { Button } from "../Button";
 import { AppContext } from "../AppContext/AppContext";
 import { deleteHero } from "../../api/superheroes";
@@ -46,7 +45,7 @@ export const Card: React.FC<Props> = ({ hero }) => {
         <Link to={`superhero/${hero._id}`}>
           <div
             className="card__banner-image"
-            style={{ backgroundImage: `url(${client.getImgUrl(hero.images[0])})` }}
+            style={{ backgroundImage: `url(${hero.images[0]}` }}
           > </div>
           <h1 className="card__title">{hero.nickname}</h1>
         </Link>
