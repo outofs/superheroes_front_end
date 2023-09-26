@@ -1,5 +1,5 @@
-// const BASE_URL = "https://superheroes-tt-api.onrender.com";
-const BASE_URL = "http://127.0.0.1:3000";
+const BASE_URL = "https://superheroes-tt-api.onrender.com";
+// const BASE_URL = "http://127.0.0.1:3000";
 
 export function wait(delay: number) {
   return new Promise(resolve => {
